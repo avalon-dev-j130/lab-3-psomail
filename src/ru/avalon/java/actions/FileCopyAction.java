@@ -8,22 +8,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-/**
- * Действие, которое копирует файлы в пределах дискового
- * пространства.
- */
 public class FileCopyAction implements Action {
-    /**
-     * {@inheritDoc}
-     */
 
-    File source;
-    File dest;
+    String source;
+    String dest;
 
     public FileCopyAction(String source, String dest){
 
-        this.source = new File(source);
-        this.dest = new File(dest);
+        this.source = source;
+        this.dest = dest;
     }
 
     public void start(){
@@ -34,87 +27,23 @@ public class FileCopyAction implements Action {
 
     @Override
     public void run() {
-        /*
-         * TODO №2 Реализуйте метод run класса FileCopyAction
-         */
 
-//          try(Reader inputStreamReader = new InputStreamReader(System.in)){
-//              BufferedReader reader = new BufferedReader(inputStreamReader);
-//
-//              System.out.print("input source file > ");
-//              File filenameSource = new File(reader.readLine());
-//
-//              System.out.print("input destination file > ");
-//
-//              File filenameDestination = new File(reader.readLine());
-//              filenameDestination.createNewFile();
-//
-//               try(InputStream inputStream = new FileInputStream(filenameSource);
-//                  OutputStream outputStream = new FileOutputStream(filenameDestination)){
-//
-//                  byte[] buffer = new byte[1024];
-//
-//                  int length;
-//                  while ((length = inputStream.read(buffer)) > 0) {
-//                      outputStream.write(buffer, 0, length);
-//                  }
-//              }
-//          } catch (IOException e) {
-//              e.printStackTrace();
-//          }
-//
-//
-//        try(Reader inputStreamReader = new InputStreamReader(System.in)){
-//              BufferedReader reader = new BufferedReader(inputStreamReader);
-//
-//              System.out.print("input source file > ");
-//              Path filenameSource = Paths.get(reader.readLine());
-//
-//              System.out.print("input destination file > ");
-//              Path filenameDestination = Paths.get(reader.readLine());
-//
-//              Files.copy(filenameSource, filenameDestination, StandardCopyOption.REPLACE_EXISTING);
-//
-//
-//          } catch (IOException e) {
-//              e.printStackTrace();
-//          }
-            try( InputStream is = new FileInputStream(source);
-                 OutputStream os = new FileOutputStream(dest)){
+              Path filenameSource = Paths.get(source);
+              Path filenameDestination = Paths.get(dest);
 
-                byte[] buffer = new byte[1024];
+        try {
+            Files.copy(filenameSource, filenameDestination, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                int length;
-                  while ((length = is.read(buffer)) > 0) {
-                      os.write(buffer, 0, length);
-                  }
-
-                os.flush();
-
-                System.out.println("Копирование " + source.getAbsolutePath() + "\n в " +  dest.getAbsolutePath() + " завершено");
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        // throw new UnsupportedOperationException("Not implemented yet!");
+        System.out.println("Copying " + filenameSource.getFileName() + " to "+ filenameDestination.getFileName() + " completed");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void close() throws Exception {
-        /*
-         * TODO №3 Реализуйте метод close класса FileCopyAction
-         */
+    public void close() {
 
         source = null;
         dest = null;
-
-        //throw new UnsupportedOperationException("Not implemented yet!");
     }
 }
