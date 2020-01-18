@@ -16,6 +16,22 @@ public class FileCopyAction implements Action {
     /**
      * {@inheritDoc}
      */
+
+    File source;
+    File dest;
+
+    public FileCopyAction(String source, String dest){
+
+        this.source = new File(source);
+        this.dest = new File(dest);
+    }
+
+    public void start(){
+        new Thread(this).start();
+        System.out.println("Start thread");
+    }
+
+
     @Override
     public void run() {
         /*
@@ -46,26 +62,45 @@ public class FileCopyAction implements Action {
 //          } catch (IOException e) {
 //              e.printStackTrace();
 //          }
+//
+//
+//        try(Reader inputStreamReader = new InputStreamReader(System.in)){
+//              BufferedReader reader = new BufferedReader(inputStreamReader);
+//
+//              System.out.print("input source file > ");
+//              Path filenameSource = Paths.get(reader.readLine());
+//
+//              System.out.print("input destination file > ");
+//              Path filenameDestination = Paths.get(reader.readLine());
+//
+//              Files.copy(filenameSource, filenameDestination, StandardCopyOption.REPLACE_EXISTING);
+//
+//
+//          } catch (IOException e) {
+//              e.printStackTrace();
+//          }
+            try( InputStream is = new FileInputStream(source);
+                 OutputStream os = new FileOutputStream(dest)){
+
+                byte[] buffer = new byte[1024];
+
+                int length;
+                  while ((length = is.read(buffer)) > 0) {
+                      os.write(buffer, 0, length);
+                  }
+
+                os.flush();
+
+                System.out.println("Копирование " + source.getAbsolutePath() + "\n в " +  dest.getAbsolutePath() + " завершено");
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
-        try(Reader inputStreamReader = new InputStreamReader(System.in)){
-              BufferedReader reader = new BufferedReader(inputStreamReader);
-
-              System.out.print("input source file > ");
-              Path filenameSource = Paths.get(reader.readLine());
-
-              System.out.print("input destination file > ");
-              Path filenameDestination = Paths.get(reader.readLine());
-
-              Files.copy(filenameSource, filenameDestination, StandardCopyOption.REPLACE_EXISTING);
-
-
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-
-
-       // throw new UnsupportedOperationException("Not implemented yet!");
+        // throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     /**
@@ -76,6 +111,10 @@ public class FileCopyAction implements Action {
         /*
          * TODO №3 Реализуйте метод close класса FileCopyAction
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+
+        source = null;
+        dest = null;
+
+        //throw new UnsupportedOperationException("Not implemented yet!");
     }
 }

@@ -23,7 +23,10 @@ public class Lab3 extends ConsoleUI<Commands> {
      * @param args 
      */
     public static void main(String[] args) {
-        new Lab3().run();
+      //  new Lab3().run();
+
+
+        new FileCopyAction("1.txt", "2.txt").start();
     }
     /**
      * Конструктор класса.
@@ -34,6 +37,7 @@ public class Lab3 extends ConsoleUI<Commands> {
     Lab3() {
         super(Commands.class);
     }
+
 
     /**
      * {@inheritDoc}
