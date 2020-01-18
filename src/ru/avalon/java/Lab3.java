@@ -24,7 +24,7 @@ import java.io.IOException;
      * @param args 
      */
     public static void main(String[] args) {
-      //  new Lab3().run();
+        new Lab3().run();
 
 
         new FileCopyAction("1.txt", "2.txt").start();
@@ -79,6 +79,9 @@ import java.io.IOException;
         switch (command.comm) {
             case copy:
 
+                new FileCopyAction(command.param[0], command.param[0]).start();
+
+                System.out.println("Запущено копирование");
                 /*
                  * TODO №6 Обработайте команду copy
                  */
@@ -89,6 +92,10 @@ import java.io.IOException;
                 /*
                  * TODO №7 Обработайте команду move
                  */
+
+                new FileMoveAction(command.param[0], command.param[0]).start();
+
+                System.out.println("Запущено перемещение");
 
             case exit:
                 close();
