@@ -16,7 +16,8 @@ import java.io.IOException;
  *
  * @author Daniel Alpatov <danial.alpatov@gmail.com>
  */
-public class Lab3 extends ConsoleUI<Commands> {
+//public class Lab3 extends ConsoleUI<Commands> {
+    public class Lab3 extends ConsoleUI {
     /**
      * Точка входа в приложение.
      * 
@@ -34,35 +35,61 @@ public class Lab3 extends ConsoleUI<Commands> {
      * Инициализирует экземпляр базового типа с использоавнием
      * перечисления {@link Commands}.
      */
-    Lab3() {
-        super(Commands.class);
-    }
+//    Lab3() {
+//        super(Commands.class);
+//    }
 
 
     /**
      * {@inheritDoc}
      */
-    @Override
+//    @Override
+//    protected void onCommand(Commands command) throws IOException {
+//        switch (command) {
+//            case copy:
+//
+//                /*
+//                 * TODO №6 Обработайте команду copy
+//                 */
+//                close();
+//
+//                FileCopyAction fileCopy = new FileCopyAction();
+//                fileCopy.start();
+//                break;
+//
+//            case move:
+//                /*
+//                 * TODO №7 Обработайте команду move
+//                 */
+//                FileMoveAction fileMove = new FileMoveAction();
+//                fileMove.start();
+//                break;
+//            case exit:
+//                close();
+//                break;
+//                /*
+//                 * TODO №9 Обработайте необработанные команды
+//                 */
+//        }
+//    }
+
+
+        @Override
     protected void onCommand(Commands command) throws IOException {
-        switch (command) {
+        switch (command.comm) {
             case copy:
 
                 /*
                  * TODO №6 Обработайте команду copy
                  */
-                close();
 
-                FileCopyAction fileCopy = new FileCopyAction();
-                fileCopy.start();
                 break;
 
             case move:
                 /*
                  * TODO №7 Обработайте команду move
                  */
-                FileMoveAction fileMove = new FileMoveAction();
-                fileMove.start();
-                break;
+
             case exit:
                 close();
                 break;

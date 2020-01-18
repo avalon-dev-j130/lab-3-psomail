@@ -1,5 +1,8 @@
 package ru.avalon.java.console;
 
+import ru.avalon.java.Commands;
+
+import java.io.Closeable;
 import java.io.IOException;
 
 /**
@@ -9,7 +12,10 @@ import java.io.IOException;
  * @param <E> тип данных, описывающий возможные команды.
  *            Дожен быть перечислением
  */
-public class ConsoleUI<E extends Enum<E>> extends EnumReader<E> implements Runnable {
+//public class ConsoleUI<E extends Enum<E>> extends EnumReader<E> implements Runnable {
+public class ConsoleUI implements Runnable, Closeable {
+
+
     /**
      * Флаг, указывающий на то, должен ли интерфейс
      * продолжать обрабатывать команды.
@@ -25,9 +31,12 @@ public class ConsoleUI<E extends Enum<E>> extends EnumReader<E> implements Runna
      * @param cls описатель перечисления, которое отражает
      *            набор команд, обрабатываемых интерфейсом
      */
-    public ConsoleUI(Class<E> cls) {
-        super(System.in, cls);
-    }
+//    public ConsoleUI(Class<E> cls) {
+//        super(System.in, cls);
+//    }
+
+
+
 
     /**
      * Выполняет обработку следующей команды из потока.
@@ -37,12 +46,12 @@ public class ConsoleUI<E extends Enum<E>> extends EnumReader<E> implements Runna
      * onCommand.
      */
     protected void processCommand() {
-        try {
-            System.out.print("> ");
-            onCommand(next());
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+//        try {
+//            System.out.print("> ");
+//            onCommand(next());
+//        } catch (IOException e) {
+//            System.err.println(e.getMessage());
+//        }
     }
 
     /**
@@ -64,8 +73,8 @@ public class ConsoleUI<E extends Enum<E>> extends EnumReader<E> implements Runna
      * 
      * @throws IOException в случае ощибки ввода вывода
      */
-    protected void onCommand(E command) throws IOException {}
-
+  //  protected void onCommand(E command) throws IOException {}
+    protected void onCommand(Commands command) throws IOException {}
     /**
      * {@inheritDoc}
      * @throws IOException 
