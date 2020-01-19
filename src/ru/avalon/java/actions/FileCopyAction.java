@@ -21,7 +21,6 @@ public class FileCopyAction implements Action {
 
     public void start(){
         new Thread(this).start();
-        System.out.println("Start thread");
     }
 
 
@@ -34,10 +33,11 @@ public class FileCopyAction implements Action {
         try {
             Files.copy(filenameSource, filenameDestination, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("tetst");
+          //  e.printStackTrace();
         }
 
-        System.out.println("Copying " + filenameSource.getFileName() + " to "+ filenameDestination.getFileName() + " completed");
+        System.out.println("Copying " + source + " to "+ dest + " completed");
     }
 
     @Override

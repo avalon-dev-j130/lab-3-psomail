@@ -4,9 +4,10 @@ import ru.avalon.java.actions.FileCopyAction;
 import ru.avalon.java.actions.FileMoveAction;
 import ru.avalon.java.console.ConsoleUI;
 
-import java.io.IOException;
+import java.awt.geom.Point2D;
+import java.util.Scanner;
 
-    public class Lab3 extends ConsoleUI {
+public class Lab3 extends ConsoleUI {
 
     public static void main(String[] args) {
         new Lab3().run();
