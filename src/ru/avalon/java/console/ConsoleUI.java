@@ -2,6 +2,8 @@ package ru.avalon.java.console;
 
 import ru.avalon.java.Commands;
 import ru.avalon.java.IllegalCommand;
+import ru.avalon.java.Lab3;
+
 import java.io.Closeable;
 import java.util.Scanner;
 
@@ -13,8 +15,7 @@ public class ConsoleUI implements Runnable, Closeable {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("> ");
-//        System.out.print("\u001b[30CSome text");
+       if(!Lab3.errorStatus) System.out.print("> ");
 
         String commandLine = scanner.nextLine();
 
@@ -23,7 +24,6 @@ public class ConsoleUI implements Runnable, Closeable {
         }
         catch (IllegalCommand illegalCommand) {
             System.out.println(illegalCommand.getMessage());
-         //   illegalCommand.printStackTrace();
         }
     }
 

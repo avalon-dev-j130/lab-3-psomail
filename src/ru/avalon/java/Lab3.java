@@ -1,13 +1,14 @@
 package ru.avalon.java;
 
 import ru.avalon.java.actions.FileCopyAction;
+import ru.avalon.java.actions.FileCreateAction;
+import ru.avalon.java.actions.FileDeleteAction;
 import ru.avalon.java.actions.FileMoveAction;
 import ru.avalon.java.console.ConsoleUI;
 
-import java.awt.geom.Point2D;
-import java.util.Scanner;
-
 public class Lab3 extends ConsoleUI {
+
+    static public boolean errorStatus = false;
 
     public static void main(String[] args) {
         new Lab3().run();
@@ -20,7 +21,7 @@ public class Lab3 extends ConsoleUI {
 
                 new FileCopyAction(command.param[0], command.param[1]).start();
 
-                System.out.println("Copying started");
+                System.out.println("> Copying started");
 
                 break;
 
@@ -28,7 +29,7 @@ public class Lab3 extends ConsoleUI {
 
                 new FileMoveAction(command.param[0], command.param[1]).start();
 
-                System.out.println("Moving started");
+                System.out.println("> Moving started");
 
                 break;
 
@@ -40,13 +41,17 @@ public class Lab3 extends ConsoleUI {
 
             case delete:
 
-                //to add
+                new FileDeleteAction(command.param[0]).start();
+
+                System.out.println("> Deleting started");
 
                 break;
 
-            case rename:
+            case createfile:
 
-                //to add
+                new FileCreateAction(command.param[0]).start();
+
+                System.out.println("> Creating started");
 
                 break;
         }

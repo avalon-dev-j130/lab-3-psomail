@@ -7,8 +7,8 @@ public class Commands{
 public enum Command {
     move,
     copy,
-    rename,
     delete,
+    createfile,
     exit
 }
 
@@ -18,17 +18,30 @@ public String[] param;
 public Commands (String input) throws IllegalCommand{
 
     String[] parts = input.trim().split(" +");
+
     switch (parts[0]) {
         case "copy" : comm = Command.copy;
+                      if(parts.length != 3) throw new IllegalCommand("> Parameters error ");
             break;
         case "move" : comm = Command.move;
+                      if(parts.length != 3) throw new IllegalCommand("> Parameters error ");
             break;
+
+        case "delete" : comm = Command.delete;
+            if(parts.length != 2) throw new IllegalCommand("> Parameters error ");
+            break;
+
+        case "createfile" : comm = Command.createfile;
+            if(parts.length != 2) throw new IllegalCommand("> Parameters error ");
+            break;
+
         case "exit" : comm = Command.exit;
             break;
-        default: throw new IllegalCommand("Unknown command " + input);
+        default: throw new IllegalCommand("> Unknown command " + input);
     }
 
     param = Arrays.copyOfRange(parts,1,parts.length);
+
 }
 
     public String toString(){
