@@ -1,61 +1,59 @@
 package ru.avalon.java;
 
+import ru.avalon.java.actions.FileCopyAction;
+import ru.avalon.java.actions.FileCreateAction;
+import ru.avalon.java.actions.FileDeleteAction;
+import ru.avalon.java.actions.FileMoveAction;
 import ru.avalon.java.console.ConsoleUI;
 
-import java.io.IOException;
+public class Lab3 extends ConsoleUI {
 
-/**
- * Лабораторная работа №3
- * <p>
- * Курс: "Программирование на платформе Java. Разработка
- * многоуровневых приложений"
- * <p>
- * Тема: "Потоки исполнения (Threads) и многозадачность" 
- *
- * @author Daniel Alpatov <danial.alpatov@gmail.com>
- */
-public class Lab3 extends ConsoleUI<Commands> {
-    /**
-     * Точка входа в приложение.
-     * 
-     * @param args 
-     */
+    static public boolean errorStatus = false;
+
     public static void main(String[] args) {
         new Lab3().run();
     }
-    /**
-     * Конструктор класса.
-     * <p>
-     * Инициализирует экземпляр базового типа с использоавнием
-     * перечисления {@link Commands}.
-     */
-    Lab3() {
-        super(Commands.class);
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onCommand(Commands command) throws IOException {
-        switch (command) {
+        @Override
+    protected void onCommand(Commands command){
+        switch (command.comm) {
             case copy:
-                /*
-                 * TODO №6 Обработайте команду copy
-                 */
+
+                new FileCopyAction(command.param[0], command.param[1]).start();
+
+                System.out.println("> Copying started");
+
                 break;
+
             case move:
-                /*
-                 * TODO №7 Обработайте команду move
-                 */
+
+                new FileMoveAction(command.param[0], command.param[1]).start();
+
+                System.out.println("> Moving started");
+
                 break;
+
             case exit:
+
                 close();
+
                 break;
-                /*
-                 * TODO №9 Обработайте необработанные команды
-                 */
+
+            case delete:
+
+                new FileDeleteAction(command.param[0]).start();
+
+                System.out.println("> Deleting started");
+
+                break;
+
+            case createfile:
+
+                new FileCreateAction(command.param[0]).start();
+
+                System.out.println("> Creating started");
+
+                break;
         }
     }
-    
 }
